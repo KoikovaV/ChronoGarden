@@ -33,20 +33,6 @@ public class PlayerController : MonoBehaviour
         playerCollider.size =
             new Vector2(0.65f, 1.1f);
 
-        // Временная графика, если нет спрайта.
-        if (GetComponent<SpriteRenderer>() == null)
-        {
-            ObjectFactory.CreateRectangle(
-                "Персонаж",
-                transform,
-                Vector2.zero,
-                new Vector2(0.65f, 1.1f),
-                new Color(0.95f, 0.55f, 0.3f),
-                false,
-                10
-            );
-        }
-
         spawnPosition = transform.position;
     }
 
@@ -186,11 +172,21 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
+
+            float bambooTop =
+                bamboo.transform.position.y +
+                bamboo.Height + 0.1f;
+
+            // Половина высоты коллайдера персонажа.
+            float playerHalfHeight =
+                playerCollider.bounds.extents.y;
+
+            // Ставим персонажа ногами на верхушку.
             rb.position = new Vector2(
                 bamboo.transform.position.x,
-                bamboo.transform.position.y +
-                bamboo.Height + 0.7f
+                bambooTop + playerHalfHeight + 0.01f
             );
+
 
             rb.linearVelocity = Vector2.zero;
 

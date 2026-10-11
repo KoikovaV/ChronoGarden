@@ -13,19 +13,6 @@ public class ExitPortal : MonoBehaviour
 
         collider.isTrigger = true;
         collider.size = new Vector2(0.9f, 1.6f);
-
-        if (GetComponent<SpriteRenderer>() == null)
-        {
-            ObjectFactory.CreateRectangle(
-                "Свечение портала",
-                transform,
-                Vector2.zero,
-                new Vector2(0.9f, 1.6f),
-                new Color(0.2f, 0.9f, 0.85f),
-                false,
-                3
-            );
-        }
     }
 
     private void Start()

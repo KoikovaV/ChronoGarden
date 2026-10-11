@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3653226177551518304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6923551535619929066}
+  - component: {fileID: 5531598103900168728}
+  - component: {fileID: 4342709650889404458}
+  m_Layer: 0
+  m_Name: VinePrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6923551535619929066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653226177551518304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5531598103900168728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653226177551518304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96da7548c426a75478ddee488d3f8e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VinePlant
+--- !u!114 &4342709650889404458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653226177551518304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99e303a7daf3b5438e88cc3aba8a442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlantAppearance
+  sproutSprite: {fileID: -7847286050214234738, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
+  youngSprite: {fileID: -7847286050214234738, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
+  matureSprite: {fileID: 4511866605157180343, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
+  oldSprite: {fileID: 4015488570318173481, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
+  sortingOrder: 5

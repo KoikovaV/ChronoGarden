@@ -4,11 +4,22 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlantingSpot : MonoBehaviour
 {
-    [Header("Какое растение можно посадить")]
+    [Header("Вид растения")]
     public PlantKind plantKind = PlantKind.Bamboo;
+
+    [Header("Префабы растений")]
+    [SerializeField]
+    private BambooPlant bambooPrefab;
+
+    [SerializeField]
+    private VinePlant vinePrefab;
+
+    [SerializeField]
+    private FernPlant fernPrefab;
 
     [Header("Условие открытия точки")]
     public PlantingSpot requiredSpot;
+
     public int requiredMinimumAge = 3;
     public int requiredMaximumAge = 5;
 
@@ -45,16 +56,6 @@ public class PlantingSpot : MonoBehaviour
         collider.isTrigger = true;
         collider.size = new Vector2(1.2f, 0.8f);
         collider.offset = new Vector2(0, 0.3f);
-
-        indicator = ObjectFactory.CreateRectangle(
-            "Место посадки",
-            transform,
-            new Vector2(0, 0.08f),
-            new Vector2(0.9f, 0.15f),
-            new Color(0.95f, 0.75f, 0.25f),
-            false,
-            4
-        );
     }
 
     private void Update()
@@ -75,34 +76,50 @@ public class PlantingSpot : MonoBehaviour
         if (selectedKind != plantKind)
             return false;
 
-        GameObject plantObject = new GameObject(
-            selectedKind.ToString()
-        );
-
-        plantObject.transform.position =
-            transform.position;
-
+        // Создаём растение из нужного префаба.
         switch (selectedKind)
         {
             case PlantKind.Bamboo:
-                createdPlant =
-                    plantObject.AddComponent<BambooPlant>();
+                if (bambooPrefab != null)
+                {
+                    createdPlant = Instantiate(
+                        bambooPrefab,
+                        transform.position,
+                        Quaternion.identity
+                    );
+                }
                 break;
 
             case PlantKind.Vine:
-                createdPlant =
-                    plantObject.AddComponent<VinePlant>();
+                if (vinePrefab != null)
+                {
+                    createdPlant = Instantiate(
+                        vinePrefab,
+                        transform.position,
+                        Quaternion.identity
+                    );
+                }
                 break;
 
             case PlantKind.Fern:
-                createdPlant =
-                    plantObject.AddComponent<FernPlant>();
+                if (fernPrefab != null)
+                {
+                    createdPlant = Instantiate(
+                        fernPrefab,
+                        transform.position,
+                        Quaternion.identity
+                    );
+                }
                 break;
         }
 
         if (createdPlant == null)
         {
-            Destroy(plantObject);
+            Debug.LogWarning(
+                "Для растения " + selectedKind +
+                " не назначен префаб в PlantingSpot."
+            );
+
             return false;
         }
 
