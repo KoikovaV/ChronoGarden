@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
+
+    [Header("Подсказка для уровня без обучения")]
+    [TextArea(2, 3)]
+    [SerializeField]
+    private string freeHint = "Найдите путь к выходу.";
+
     public enum Stage
     {
         Free,
@@ -42,7 +48,7 @@ public class TutorialManager : MonoBehaviour
             switch (CurrentStage)
             {
                 case Stage.Free:
-                    return "Найдите путь к выходу.";
+                    return freeHint;
 
                 case Stage.Move:
                     return "Шаг 1/6. Идите к грядке: A и D.";

@@ -8,6 +8,29 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int levelNumber = 1;
     [SerializeField] private string nextSceneName = "";
 
+    [Header("Доступные растения")]
+    [SerializeField] private bool bambooEnabled = true;
+    [SerializeField] private bool vineEnabled = true;
+    [SerializeField] private bool fernEnabled = false;
+
+    public bool IsPlantAvailable(PlantKind kind)
+    {
+        switch (kind)
+        {
+            case PlantKind.Bamboo:
+                return bambooEnabled;
+
+            case PlantKind.Vine:
+                return vineEnabled;
+
+            case PlantKind.Fern:
+                return fernEnabled;
+
+            default:
+                return false;
+        }
+    }
+
     [Header("Объекты сцены")]
     [SerializeField] private PlayerController player;
     [SerializeField] private TimeController timeController;

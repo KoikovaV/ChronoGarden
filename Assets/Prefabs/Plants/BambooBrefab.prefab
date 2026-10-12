@@ -61,5 +61,5 @@ MonoBehaviour:
   youngSprite: {fileID: 8575323987710701431, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
   matureSprite: {fileID: -1604338710571844097, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
   oldSprite: {fileID: -4517664159471177751, guid: 0ed149cf44183a841a3c80d1bf782765, type: 3}
-  bambooOffset: {x: 0, y: 0.1}
+  bambooOffset: {x: 0, y: -0.25}
   sortingOrder: 5

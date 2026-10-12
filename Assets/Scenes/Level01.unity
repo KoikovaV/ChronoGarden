@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60dacd33e96a3e843beff56b78ad8008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExitPortal
+  requiredPlants: []
 --- !u!61 &1080641531
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1140,6 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e7d53c173963846b8ae349f9ca5f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
+  freeHint: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u043F\u0443\u0442\u044C \u043A \u0432\u044B\u0445\u043E\u0434\u0443."
   enableTutorial: 1
   tutorialSpot: {fileID: 1397609648}
 --- !u!114 &1656519966
@@ -1167,7 +1169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   levelNumber: 1
-  nextSceneName: 
+  nextSceneName: Level02
+  bambooEnabled: 1
+  vineEnabled: 0
+  fernEnabled: 0
   player: {fileID: 2112316621}
   timeController: {fileID: 1656519966}
   tutorial: {fileID: 1656519965}

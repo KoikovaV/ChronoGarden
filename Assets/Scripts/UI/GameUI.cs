@@ -70,6 +70,7 @@ public class GameUI : MonoBehaviour
             DrawVictoryWindow(width, height);
     }
 
+
     private void DrawTopPanel(float width)
     {
         GUI.Box(
@@ -77,55 +78,106 @@ public class GameUI : MonoBehaviour
             ""
         );
 
-        string[] buttons =
-        {
-            "Бамбук [1]",
-            "Лиана [2]",
-            "Папоротник [3]",
-            "-1 [Q]",
-            "+1 [E]",
-            "Сброс [R]"
-        };
+        TimeController controller = level.Time;
+
+        // Количество кнопок зависит от растений уровня.
+        int buttonCount = 3; // -1, +1, сброс
+
+        if (level.IsPlantAvailable(PlantKind.Bamboo))
+            buttonCount++;
+
+        if (level.IsPlantAvailable(PlantKind.Vine))
+            buttonCount++;
+
+        if (level.IsPlantAvailable(PlantKind.Fern))
+            buttonCount++;
 
         float gap = 5f;
-        float buttonWidth = (width - 24f - 5f * gap) / 6f;
+        float buttonWidth =
+            (width - 24f - (buttonCount - 1) * gap)
+            / buttonCount;
 
-        for (int i = 0; i < buttons.Length; i++)
+        float x = 12f;
+
+        if (level.IsPlantAvailable(PlantKind.Bamboo))
         {
-            float x = 12 + i * (buttonWidth + gap);
-
             if (GUI.Button(
                 new Rect(x, 14, buttonWidth, 38),
-                buttons[i]))
+                "Бамбук [1]"))
             {
-                HandleTopButton(i);
+                controller?.SelectSeed(PlantKind.Bamboo);
             }
+
+            x += buttonWidth + gap;
         }
 
-        TimeController controller = level.Time;
+        if (level.IsPlantAvailable(PlantKind.Vine))
+        {
+            if (GUI.Button(
+                new Rect(x, 14, buttonWidth, 38),
+                "Лиана [2]"))
+            {
+                controller?.SelectSeed(PlantKind.Vine);
+            }
+
+            x += buttonWidth + gap;
+        }
+
+        if (level.IsPlantAvailable(PlantKind.Fern))
+        {
+            if (GUI.Button(
+                new Rect(x, 14, buttonWidth, 38),
+                "Папоротник [3]"))
+            {
+                controller?.SelectSeed(PlantKind.Fern);
+            }
+
+            x += buttonWidth + gap;
+        }
+
+        if (GUI.Button(
+            new Rect(x, 14, buttonWidth, 38),
+            "-1 [Q]"))
+        {
+            controller?.ChangeSelectedAge(-1);
+        }
+
+        x += buttonWidth + gap;
+
+        if (GUI.Button(
+            new Rect(x, 14, buttonWidth, 38),
+            "+1 [E]"))
+        {
+            controller?.ChangeSelectedAge(1);
+        }
+
+        x += buttonWidth + gap;
+
+        if (GUI.Button(
+            new Rect(x, 14, buttonWidth, 38),
+            "Сброс [R]"))
+        {
+            level.RestartLevel();
+        }
 
         if (controller != null)
         {
-            string selectedSeed =
+            string info = "Выбрано семя: " +
                 PlantName(controller.SelectedSeed);
-
-            string plantInfo = "Выбрано семя: " +
-                selectedSeed;
 
             if (controller.SelectedPlant != null)
             {
-                PlantBase plant =
-                    controller.SelectedPlant;
+                PlantBase plant = controller.SelectedPlant;
 
-                plantInfo += " | Растение: " +
+                info += " | Растение: " +
                     PlantName(plant.Kind) +
-                    " | Возраст: " + plant.Age +
-                    " сек.";
+                    " | Возраст: " +
+                    plant.Age + " сек.";
             }
 
             GUI.Label(
                 new Rect(18, 58, width - 36, 25),
-                plantInfo
+                info
             );
         }
 
@@ -135,41 +187,6 @@ public class GameUI : MonoBehaviour
                 new Rect(18, 89, width - 36, 30),
                 level.Tutorial.Message
             );
-        }
-    }
-
-    private void HandleTopButton(int index)
-    {
-        TimeController controller = level.Time;
-
-        if (controller == null)
-            return;
-
-        switch (index)
-        {
-            case 0:
-                controller.SelectSeed(PlantKind.Bamboo);
-                break;
-
-            case 1:
-                controller.SelectSeed(PlantKind.Vine);
-                break;
-
-            case 2:
-                controller.SelectSeed(PlantKind.Fern);
-                break;
-
-            case 3:
-                controller.ChangeSelectedAge(-1);
-                break;
-
-            case 4:
-                controller.ChangeSelectedAge(1);
-                break;
-
-            case 5:
-                level.RestartLevel();
-                break;
         }
     }
 

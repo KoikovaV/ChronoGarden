@@ -39,13 +39,30 @@ public class TimeController : MonoBehaviour
             HandleMouseClick();
     }
 
+
     public void SelectSeed(PlantKind kind)
     {
+        if (level == null || level.IsCompleted)
+            return;
+
+        if (!level.IsPlantAvailable(kind))
+        {
+            if (level.Tutorial != null)
+            {
+                level.Tutorial.ShowHint(
+                    "Это растение недоступно на уровне."
+                );
+            }
+
+            return;
+        }
+
         SelectedSeed = kind;
 
         if (level.Tutorial != null)
             level.Tutorial.OnSeedChosen(kind);
     }
+
 
     public void SelectPlant(PlantBase plant)
     {
